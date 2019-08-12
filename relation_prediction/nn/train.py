@@ -53,11 +53,11 @@ else:
 
 print("Embedding match number {} out of {}".format(match_embedding, len(TEXT.vocab)))
 
-train_iter = data.Iterator(train, batch_size=args.batch_size, device=args.gpu, train=True, repeat=False,
+train_iter = data.Iterator(train, batch_size=args.batch_size, device="cuda", train=True, repeat=False,
                                    sort=False, shuffle=True, sort_within_batch=False)
-dev_iter = data.Iterator(dev, batch_size=args.batch_size, device=args.gpu, train=False, repeat=False,
+dev_iter = data.Iterator(dev, batch_size=args.batch_size, device="cuda", train=False, repeat=False,
                                    sort=False, shuffle=False, sort_within_batch=False)
-test_iter = data.Iterator(test, batch_size=args.batch_size, device=args.gpu, train=False, repeat=False,
+test_iter = data.Iterator(test, batch_size=args.batch_size, device="cuda", train=False, repeat=False,
                                    sort=False, shuffle=False, sort_within_batch=False)
 
 config = args

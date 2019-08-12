@@ -24,7 +24,7 @@ if not args.cuda:
     args.gpu = -1
 if torch.cuda.is_available() and args.cuda:
     print("Note: You are using GPU for training")
-    torch.cuda.set_device(args.gpu)
+    # torch.cuda.set_device(args.gpu)
     torch.cuda.manual_seed(args.seed)
 if torch.cuda.is_available() and not args.cuda:
     print("Warning: You have Cuda but not use it. You are using CPU for training.")
@@ -36,11 +36,11 @@ train, dev, test = SQdataset.splits(TEXT, ED, path=args.data_dir)
 TEXT.build_vocab(train, dev, test)
 ED.build_vocab(train, dev, test)
 
-train_iter = data.Iterator(train, batch_size=args.batch_size, device=args.gpu, train=True, repeat=False,
+train_iter = data.Iterator(train, batch_size=args.batch_size, device="cuda", train=True, repeat=False,
                                    sort=False, shuffle=True)
-dev_iter = data.Iterator(dev, batch_size=args.batch_size, device=args.gpu, train=False, repeat=False,
+dev_iter = data.Iterator(dev, batch_size=args.batch_size, device="cuda", train=False, repeat=False,
                                    sort=False, shuffle=False)
-test_iter = data.Iterator(test, batch_size=args.batch_size, device=args.gpu, train=False, repeat=False,
+test_iter = data.Iterator(test, batch_size=args.batch_size, device="cuda", train=False, repeat=False,
                                    sort=False, shuffle=False)
 
 # load the model
@@ -138,8 +138,3 @@ predict(dataset_iter=dev_iter, dataset=dev, data_name="valid")
 
 # run the model on the test set and write the output to a file
 predict(dataset_iter=test_iter, dataset=test, data_name="test")
-
-
-
-
-

@@ -180,10 +180,3 @@ if __name__=="__main__":
     mid2wiki = get_mid2wiki(args.wiki_path)
 
     test_answers = evidence_integration(args.data_path, args.ent_path, args.rel_path, output_dir, index_reach, index_degrees, mid2wiki, args.heuristics, args.hits_ent, args.hits_rel)
-
-
-
-
-
-
-

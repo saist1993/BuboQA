@@ -32,11 +32,11 @@ train, dev, test = SQdataset.splits(TEXT, RELATION, args.data_dir)
 TEXT.build_vocab(train, dev, test)
 RELATION.build_vocab(train, dev)
 
-train_iter = data.Iterator(train, batch_size=args.batch_size, device=args.gpu, train=True, repeat=False,
+train_iter = data.Iterator(train, batch_size=args.batch_size, device="cuda", train=True, repeat=False,
                                    sort=False, shuffle=True)
-dev_iter = data.Iterator(dev, batch_size=args.batch_size, device=args.gpu, train=False, repeat=False,
+dev_iter = data.Iterator(dev, batch_size=args.batch_size, device="cuda", train=False, repeat=False,
                                    sort=False, shuffle=False)
-test_iter = data.Iterator(test, batch_size=args.batch_size, device=args.gpu, train=False, repeat=False,
+test_iter = data.Iterator(test, batch_size=args.batch_size, device="cuda", train=False, repeat=False,
                                    sort=False, shuffle=False)
 
 # load the model

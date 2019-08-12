@@ -24,7 +24,7 @@ if not args.cuda:
     args.gpu = -1
 if torch.cuda.is_available() and args.cuda:
     print("Note: You are using GPU for training")
-    torch.cuda.set_device(args.gpu)
+    # torch.cuda.set_device(args.gpu)
     torch.cuda.manual_seed(args.seed)
 if torch.cuda.is_available() and not args.cuda:
     print("Warning: You have Cuda but not use it. You are using CPU for training.")
@@ -54,11 +54,11 @@ else:
 
 print("Embedding match number {} out of {}".format(match_embedding, len(TEXT.vocab)))
 
-train_iter = data.Iterator(train, batch_size=args.batch_size, device=args.gpu, train=True, repeat=False,
+train_iter = data.Iterator(train, batch_size=args.batch_size, device="cuda", train=True, repeat=False,
                                    sort=False, shuffle=True, sort_within_batch=False)
-dev_iter = data.Iterator(dev, batch_size=args.batch_size, device=args.gpu, train=False, repeat=False,
+dev_iter = data.Iterator(dev, batch_size=args.batch_size, device="cuda", train=False, repeat=False,
                                    sort=False, shuffle=False, sort_within_batch=False)
-test_iter = data.Iterator(test, batch_size=args.batch_size, device=args.gpu, train=False, repeat=False,
+test_iter = data.Iterator(test, batch_size=args.batch_size, device="cuda", train=False, repeat=False,
                                    sort=False, shuffle=False, sort_within_batch=False)
 
 config = args
@@ -73,7 +73,7 @@ else:
 
 model.embed.weight.data.copy_(TEXT.vocab.vectors)
 if args.cuda:
-    modle = model.to(torch.device("cuda:{}".format(args.gpu)))
+    model = model.to(torch.device("cuda"))
     print("Shift model to GPU")
 
 print(config)
