@@ -1,3 +1,4 @@
+import sys
 import torch
 import torch.nn as nn
 import time
@@ -10,7 +11,7 @@ from evaluation import evaluation
 from sq_entity_dataset import SQdataset
 from entity_detection import EntityDetection
 
-np.set_printoptions(threshold=np.nan)
+np.set_printoptions(threshold=sys.maxsize)
 # Set default configuration in : args.py
 args = get_args()
 

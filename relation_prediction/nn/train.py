@@ -1,3 +1,4 @@
+import sys
 import torch
 import torch.nn as nn
 import time
@@ -9,7 +10,7 @@ import random
 from sq_relation_dataset import SQdataset
 from relation_prediction import RelationPrediction
 
-np.set_printoptions(threshold=np.nan)
+np.set_printoptions(threshold=sys.maxsize)
 # Set default configuration in : args.py
 args = get_args()
 
